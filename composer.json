@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Bilyiv\\Elastic\\Apm\\Client": "/src/"
+      "Bilyiv\\Elastic\\Apm\\Client\\": "/src/"
     }
   },
   "extra": {
