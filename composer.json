@@ -1,0 +1,26 @@
+{
+  "name": "bilyiv/elastic-apm-php",
+  "description": "PHP client for Elastic APM.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vladyslav Bilyi",
+      "email": "vladyslav.bilyi@gmail.com"
+    }
+  ],
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.2",
+    "symfony/http-client": "^4.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bilyiv\\Elastic\\Apm\\Client": "/src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
