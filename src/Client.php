@@ -53,8 +53,8 @@ class Client
     public function send(array $transactions, Metadata $metadata): ?ResponseInterface
     {
         $body =
-            $this->encoder->encodeTransactions($transactions) .
-            $this->encoder->encodeMetadata($metadata);
+            $this->encoder->encodeMetadata($metadata) .
+            $this->encoder->encodeTransactions($transactions);
 
         if (!$body) {
             return null;

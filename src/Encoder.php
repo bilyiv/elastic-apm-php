@@ -20,7 +20,7 @@ class Encoder
         $result = null;
 
         foreach ($transactions as $transaction) {
-            $result .= $this->encodeTransaction($transaction) . PHP_EOL;
+            $result .= $this->encodeTransaction($transaction);
         }
 
         return $result;
@@ -33,7 +33,7 @@ class Encoder
      */
     public function encodeTransaction(Transaction $transaction): string
     {
-        return json_encode($transaction->toArray());
+        return json_encode($transaction->toArray()) . PHP_EOL;
     }
 
     /**
@@ -43,6 +43,6 @@ class Encoder
      */
     public function encodeMetadata(Metadata $metadata): string
     {
-        return json_encode($metadata->toArray());
+        return json_encode($metadata->toArray()) . PHP_EOL;
     }
 }

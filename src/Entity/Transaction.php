@@ -46,14 +46,14 @@ class Transaction implements EncodableInterface
     private $trace;
 
     /**
-     * @var int
+     * @var float
      */
     private $createdAt;
 
     public function __construct()
     {
         $this->id = IdGenerator::generate();
-        $this->createdAt = time();
+        $this->createdAt = microtime(true);;
     }
 
     /**

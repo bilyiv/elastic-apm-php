@@ -44,7 +44,7 @@ class Manager
      */
     public static function endTransaction(Transaction $transaction, string $result)
     {
-        $duration = time() - $transaction->getCreatedAt();
+        $duration = (microtime(true) - $transaction->getCreatedAt()) * 1000;
 
         $transaction
             ->setResult($result)
