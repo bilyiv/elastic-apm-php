@@ -199,12 +199,14 @@ class Transaction implements EncodableInterface
     {
         return [
             'id' => $this->id,
-            'trace_id' => $this->trace->getId(),
+            'name' => $this->name,
+            'type' => $this->type,
+            'result' =>$this->result,
+            'duration' => $this->duration,
             'span_count' => [
                 'started' => count($this->getSpans())
             ],
-            'duration' => $this->duration,
-            'result' =>$this->result,
+            'trace_id' => $this->trace->getId(),
         ];
     }
 }
