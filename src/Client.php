@@ -63,6 +63,9 @@ class Client
         return HttpClient::create()->request('POST', $this->url . '/intake/v2/events', [
             'body' => $body,
             'auth_bearer' => $this->secretToken,
+            'headers' => [
+                'Content-Type' => 'application/x-ndjson'
+            ]
         ]);
     }
 }
