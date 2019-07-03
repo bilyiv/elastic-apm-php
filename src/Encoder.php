@@ -33,7 +33,7 @@ class Encoder
      */
     public function encodeTransaction(Transaction $transaction): string
     {
-        return json_encode($transaction->toArray()) . PHP_EOL;
+        return json_encode(['transaction' => $transaction->toArray()]) . PHP_EOL;
     }
 
     /**
@@ -43,6 +43,6 @@ class Encoder
      */
     public function encodeMetadata(Metadata $metadata): string
     {
-        return json_encode($metadata->toArray()) . PHP_EOL;
+        return json_encode(['metadata' => $metadata->toArray()]) . PHP_EOL;
     }
 }
