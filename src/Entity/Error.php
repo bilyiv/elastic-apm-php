@@ -21,7 +21,7 @@ class Error implements EncodableInterface
     private $culprit;
 
     /**
-     * @var \Exception|null
+     * @var \Throwable|null
      */
     private $exception;
 
@@ -80,19 +80,19 @@ class Error implements EncodableInterface
     }
 
     /**
-     * @return \Exception|null
+     * @return \Throwable|null
      */
-    public function getException(): ?\Exception
+    public function getException(): ?\Throwable
     {
         return $this->exception;
     }
 
     /**
-     * @param \Exception $exception
+     * @param \Throwable $exception
      *
      * @return Error
      */
-    public function setException(\Exception $exception): self
+    public function setException(\Throwable $exception): self
     {
         $this->exception = $exception;
 

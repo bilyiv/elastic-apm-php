@@ -2,6 +2,7 @@
 
 namespace Bilyiv\Elastic\Apm\Client;
 
+use Bilyiv\Elastic\Apm\Client\Entity\Error;
 use Bilyiv\Elastic\Apm\Client\Entity\Transaction;
 
 /**
@@ -13,6 +14,11 @@ class Register
      * @var array
      */
     private $transactions = [];
+
+    /**
+     * @var array
+     */
+    private $errors = [];
 
     /**
      * @var Register
@@ -35,6 +41,22 @@ class Register
     public function addTransaction(Transaction $transaction)
     {
         $this->transactions[$transaction->getId()] = $transaction;
+    }
+
+    /**
+     * @return array|Error[]
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * @param Error $error
+     */
+    public function addError(Error $error)
+    {
+        $this->errors[$error->getId()] = $error;
     }
 
     /**
