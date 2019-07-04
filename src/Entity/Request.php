@@ -48,7 +48,9 @@ class Request implements EncodableInterface
     {
         return [
             'method' => $this->method,
-            'url' => $this->url,
+            'url' => [
+                'pathname' => $this->url
+            ],
         ];
     }
 }
