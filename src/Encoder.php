@@ -2,6 +2,7 @@
 
 namespace Bilyiv\Elastic\Apm\Client;
 
+use Bilyiv\Elastic\Apm\Client\Entity\Error;
 use Bilyiv\Elastic\Apm\Client\Entity\Metadata;
 use Bilyiv\Elastic\Apm\Client\Entity\Transaction;
 
@@ -34,6 +35,32 @@ class Encoder
     public function encodeTransaction(Transaction $transaction): string
     {
         return json_encode(['transaction' => $transaction->toArray()]) . PHP_EOL;
+    }
+
+    /**
+     * @param array|Error[] $errors
+     *
+     * @return null|string
+     */
+    public function encodeErrors(array $errors): ?string
+    {
+        $result = null;
+
+        foreach ($errors as $error) {
+            $result .= $this->encodeError($error);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param Error $error
+     *
+     * @return string
+     */
+    public function encodeError(Error $error): string
+    {
+        return json_encode(['error' => $error->toArray()]) . PHP_EOL;
     }
 
     /**

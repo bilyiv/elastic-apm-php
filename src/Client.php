@@ -45,15 +45,17 @@ class Client
 
     /**
      * @param array $transactions
+     * @param array $errors
      * @param Metadata $metadata
      *
      * @return ResponseInterface|null
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function send(array $transactions, Metadata $metadata): ?ResponseInterface
+    public function send(array $transactions, array $errors, Metadata $metadata): ?ResponseInterface
     {
         $body =
             $this->encoder->encodeMetadata($metadata) .
+            $this->encoder->encodeErrors($errors) .
             $this->encoder->encodeTransactions($transactions);
 
         if (!$body) {
