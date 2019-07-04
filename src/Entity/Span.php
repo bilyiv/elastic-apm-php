@@ -2,7 +2,7 @@
 
 namespace Bilyiv\Elastic\Apm\Client\Entity;
 
-use Bilyiv\IdGenerator;
+use Bilyiv\Elastic\Apm\Client\IdGenerator;
 
 /**
  * @author Vladyslav Bilyi <vladyslav.bilyi@gmail.com>

@@ -46,6 +46,11 @@ class Transaction implements EncodableInterface
     private $trace;
 
     /**
+     * @var Context|null
+     */
+    private $context;
+
+    /**
      * @var float
      */
     private $createdAt;
@@ -185,6 +190,26 @@ class Transaction implements EncodableInterface
     }
 
     /**
+     * @return Context|null
+     */
+    public function getContext(): ?Context
+    {
+        return $this->context;
+    }
+
+    /**
+     * @param Context $context
+     *
+     * @return Transaction
+     */
+    public function setContext(Context $context): self
+    {
+        $this->context = $context;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getCreatedAt(): int
@@ -197,7 +222,7 @@ class Transaction implements EncodableInterface
      */
     public function toArray(): array
     {
-        return [
+        $result = [
             'id' => $this->id,
             'name' => $this->name,
             'type' => $this->type,
@@ -208,5 +233,11 @@ class Transaction implements EncodableInterface
             ],
             'trace_id' => $this->trace->getId(),
         ];
+
+        if ($this->context) {
+            $result['context'] = $this->context->toArray();
+        }
+
+        return $result;
     }
 }
