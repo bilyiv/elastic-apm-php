@@ -2,7 +2,6 @@
 
 namespace Bilyiv\Elastic\Apm\Client;
 
-use Bilyiv\Elastic\Apm\Client\Scheme\Metadata;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -44,19 +43,18 @@ class Client
     }
 
     /**
-     * @param array $transactions
-     * @param array $errors
-     * @param Metadata $metadata
+     * @param Register $register
      *
      * @return ResponseInterface|null
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function send(array $transactions, array $errors, Metadata $metadata): ?ResponseInterface
+    public function send(Register $register): ?ResponseInterface
     {
         $body =
-            $this->encoder->encodeMetadata($metadata) .
-            $this->encoder->encodeErrors($errors) .
-            $this->encoder->encodeTransactions($transactions);
+            $this->encoder->encodeMetadata($register->getMetadata()) .
+            $this->encoder->encodeErrors($register->getErrors()) .
+            $this->encoder->encodeTransactions($register->getTransactions()) .
+            $this->encoder->encodeMetricsets($register->getMetricsets());
 
         if (!$body) {
             return null;

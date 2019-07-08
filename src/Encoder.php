@@ -4,6 +4,7 @@ namespace Bilyiv\Elastic\Apm\Client;
 
 use Bilyiv\Elastic\Apm\Client\Scheme\Error;
 use Bilyiv\Elastic\Apm\Client\Scheme\Metadata;
+use Bilyiv\Elastic\Apm\Client\Scheme\Metricset;
 use Bilyiv\Elastic\Apm\Client\Scheme\Transaction;
 
 /**
@@ -44,13 +45,29 @@ class Encoder
     }
 
     /**
+     * @param array|Metricset[] $metricsets
+     *
+     * @return null|string
+     */
+    public function encodeMetricsets(array $metricsets): ?string
+    {
+        $result = null;
+
+        foreach ($metricsets as $metricset) {
+            $result .= $this->encodeMetricset($metricset);
+        }
+
+        return $result;
+    }
+
+    /**
      * @param Transaction $transaction
      *
      * @return string
      */
     public function encodeTransaction(Transaction $transaction): string
     {
-        return json_encode(['transaction' => $this->encode($transaction)]) . PHP_EOL;
+        return $this->encode('transaction', $transaction);
     }
 
     /**
@@ -60,7 +77,17 @@ class Encoder
      */
     public function encodeError(Error $error): string
     {
-        return json_encode(['error' => $this->encode($error)]) . PHP_EOL;
+        return $this->encode('error', $error);
+    }
+
+    /**
+     * @param Metricset $metricset
+     *
+     * @return string
+     */
+    public function encodeMetricset(Metricset $metricset): string
+    {
+        return $this->encode('metricset', $metricset);
     }
 
     /**
@@ -70,16 +97,17 @@ class Encoder
      */
     public function encodeMetadata(Metadata $metadata): string
     {
-        return json_encode(['metadata' => $this->encode($metadata)]) . PHP_EOL;
+        return $this->encode('metadata', $metadata);
     }
 
     /**
+     * @param string $key
      * @param EncodableInterface $encodable
      *
-     * @return array
+     * @return string
      */
-    public function encode(EncodableInterface $encodable): array
+    public function encode(string $key, EncodableInterface $encodable): string
     {
-        return $encodable->toArray();
+        return json_encode([$key => $encodable->toArray()]) . PHP_EOL;
     }
 }

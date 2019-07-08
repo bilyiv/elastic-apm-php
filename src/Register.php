@@ -3,6 +3,8 @@
 namespace Bilyiv\Elastic\Apm\Client;
 
 use Bilyiv\Elastic\Apm\Client\Scheme\Error;
+use Bilyiv\Elastic\Apm\Client\Scheme\Metadata;
+use Bilyiv\Elastic\Apm\Client\Scheme\Metricset;
 use Bilyiv\Elastic\Apm\Client\Scheme\Transaction;
 
 /**
@@ -19,6 +21,16 @@ class Register
      * @var array
      */
     private $errors = [];
+
+    /**
+     * @var array
+     */
+    private $metricsets = [];
+
+    /**
+     * @var Metadata|null
+     */
+    private $metadata;
 
     /**
      * @var Register
@@ -57,6 +69,38 @@ class Register
     public function addError(Error $error)
     {
         $this->errors[$error->getId()] = $error;
+    }
+
+    /**
+     * @return array|Metricset[]
+     */
+    public function getMetricsets(): array
+    {
+        return $this->metricsets;
+    }
+
+    /**
+     * @param Metricset $metricset
+     */
+    public function addMetricset(Metricset $metricset)
+    {
+        $this->metricsets[] = $metricset;
+    }
+
+    /**
+     * @return Metadata|null
+     */
+    public function getMetadata(): ?Metadata
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * @param Metadata $metadata
+     */
+    public function setMetadata(Metadata $metadata)
+    {
+        $this->metadata = $metadata;
     }
 
     /**
