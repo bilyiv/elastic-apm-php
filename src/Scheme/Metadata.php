@@ -1,8 +1,9 @@
 <?php
 
-namespace Bilyiv\Elastic\Apm\Client\Entity;
+namespace Bilyiv\Elastic\Apm\Client\Scheme;
 
 use Bilyiv\Elastic\Apm\Client\EncodableInterface;
+use Bilyiv\Elastic\Apm\Client\Scheme\Metadata\Service;
 
 /**
  * @author Vladyslav Bilyi <vladyslav.bilyi@gmail.com>

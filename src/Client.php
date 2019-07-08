@@ -2,7 +2,7 @@
 
 namespace Bilyiv\Elastic\Apm\Client;
 
-use Bilyiv\Elastic\Apm\Client\Entity\Metadata;
+use Bilyiv\Elastic\Apm\Client\Scheme\Metadata;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 

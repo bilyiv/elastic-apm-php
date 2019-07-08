@@ -1,6 +1,6 @@
 <?php
 
-namespace Bilyiv\Elastic\Apm\Client\Entity;
+namespace Bilyiv\Elastic\Apm\Client\Scheme\Metadata;
 
 use Bilyiv\Elastic\Apm\Client\EncodableInterface;
 

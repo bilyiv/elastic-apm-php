@@ -2,9 +2,9 @@
 
 namespace Bilyiv\Elastic\Apm\Client;
 
-use Bilyiv\Elastic\Apm\Client\Entity\Error;
-use Bilyiv\Elastic\Apm\Client\Entity\Metadata;
-use Bilyiv\Elastic\Apm\Client\Entity\Transaction;
+use Bilyiv\Elastic\Apm\Client\Scheme\Error;
+use Bilyiv\Elastic\Apm\Client\Scheme\Metadata;
+use Bilyiv\Elastic\Apm\Client\Scheme\Transaction;
 
 /**
  * @author Vladyslav Bilyi <vladyslav.bilyi@gmail.com>
@@ -28,16 +28,6 @@ class Encoder
     }
 
     /**
-     * @param Transaction $transaction
-     *
-     * @return string
-     */
-    public function encodeTransaction(Transaction $transaction): string
-    {
-        return json_encode(['transaction' => $transaction->toArray()]) . PHP_EOL;
-    }
-
-    /**
      * @param array|Error[] $errors
      *
      * @return null|string
@@ -54,13 +44,23 @@ class Encoder
     }
 
     /**
+     * @param Transaction $transaction
+     *
+     * @return string
+     */
+    public function encodeTransaction(Transaction $transaction): string
+    {
+        return json_encode(['transaction' => $this->encode($transaction)]) . PHP_EOL;
+    }
+
+    /**
      * @param Error $error
      *
      * @return string
      */
     public function encodeError(Error $error): string
     {
-        return json_encode(['error' => $error->toArray()]) . PHP_EOL;
+        return json_encode(['error' => $this->encode($error)]) . PHP_EOL;
     }
 
     /**
@@ -70,6 +70,16 @@ class Encoder
      */
     public function encodeMetadata(Metadata $metadata): string
     {
-        return json_encode(['metadata' => $metadata->toArray()]) . PHP_EOL;
+        return json_encode(['metadata' => $this->encode($metadata)]) . PHP_EOL;
+    }
+
+    /**
+     * @param EncodableInterface $encodable
+     *
+     * @return array
+     */
+    public function encode(EncodableInterface $encodable): array
+    {
+        return $encodable->toArray();
     }
 }

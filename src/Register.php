@@ -2,8 +2,8 @@
 
 namespace Bilyiv\Elastic\Apm\Client;
 
-use Bilyiv\Elastic\Apm\Client\Entity\Error;
-use Bilyiv\Elastic\Apm\Client\Entity\Transaction;
+use Bilyiv\Elastic\Apm\Client\Scheme\Error;
+use Bilyiv\Elastic\Apm\Client\Scheme\Transaction;
 
 /**
  * @author Vladyslav Bilyi <vladyslav.bilyi@gmail.com>

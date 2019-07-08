@@ -1,8 +1,8 @@
 <?php
 
-namespace Bilyiv\Elastic\Apm\Client\Entity;
+namespace Bilyiv\Elastic\Apm\Client\Scheme;
 
-use Bilyiv\Elastic\Apm\Client\IdGenerator;
+use Bilyiv\Elastic\Apm\Client\Generator;
 
 /**
  * @author Vladyslav Bilyi <vladyslav.bilyi@gmail.com>
@@ -16,6 +16,6 @@ class Span
 
     public function __construct()
     {
-        $this->id = IdGenerator::generate();
+        $this->id = Generator::id();
     }
 }

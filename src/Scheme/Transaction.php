@@ -1,9 +1,10 @@
 <?php
 
-namespace Bilyiv\Elastic\Apm\Client\Entity;
+namespace Bilyiv\Elastic\Apm\Client\Scheme;
 
 use Bilyiv\Elastic\Apm\Client\EncodableInterface;
-use Bilyiv\Elastic\Apm\Client\IdGenerator;
+use Bilyiv\Elastic\Apm\Client\Generator;
+use Bilyiv\Elastic\Apm\Client\Scheme\Context\Context;
 
 /**
  * @author Vladyslav Bilyi <vladyslav.bilyi@gmail.com>
@@ -57,7 +58,7 @@ class Transaction implements EncodableInterface
 
     public function __construct()
     {
-        $this->id = IdGenerator::generate();
+        $this->id = Generator::id();
         $this->createdAt = microtime(true);;
     }
 
