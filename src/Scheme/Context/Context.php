@@ -15,6 +15,11 @@ class Context implements EncodableInterface
     private $request;
 
     /**
+     * @var Response
+     */
+    private $response;
+
+    /**
      * @return Request|null
      */
     public function getRequest(): ?Request
@@ -35,6 +40,26 @@ class Context implements EncodableInterface
     }
 
     /**
+     * @return Response|null
+     */
+    public function getResponse(): ?Request
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param Response $response
+     *
+     * @return Context
+     */
+    public function setResponse(Response $response): self
+    {
+        $this->response = $response;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array
@@ -43,6 +68,10 @@ class Context implements EncodableInterface
 
         if ($this->request) {
             $result['request'] = $this->request->toArray();
+        }
+
+        if ($this->response) {
+            $result['response'] = $this->response->toArray();
         }
 
         return $result;
